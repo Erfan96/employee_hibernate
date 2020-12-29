@@ -24,7 +24,7 @@ public class Address {
     @Column(name = "city", nullable = false)
     private String city;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "emp_id", nullable = false)
     private Employee employee;
 }

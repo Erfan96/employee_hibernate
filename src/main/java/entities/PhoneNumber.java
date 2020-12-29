@@ -9,7 +9,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@ToString
 public class PhoneNumber {
 
     @Id
@@ -25,4 +24,13 @@ public class PhoneNumber {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "add_id", nullable = false)
     private Address address;
+
+    @Override
+    public String toString() {
+        return "PhoneNumber{" +
+                "telNumber='" + telNumber + '\'' +
+                ", mobNumber='" + mobNumber + '\'' +
+                ", address=" + address +
+                '}';
+    }
 }

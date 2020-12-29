@@ -10,7 +10,6 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@ToString
 public class Employee {
 
     @Id
@@ -28,4 +27,13 @@ public class Employee {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
     private Set<Address> addresses;
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "name='" + name + '\'' +
+                ", empCode='" + empCode + '\'' +
+                ", salary=" + salary +
+                '}';
+    }
 }

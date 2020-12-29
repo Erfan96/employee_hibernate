@@ -21,4 +21,8 @@ public class PhoneNumber {
 
     @Column(name = "mob_number", nullable = false, length = 11)
     private Integer mobNumber;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "add_id", nullable = false)
+    private Address address;
 }

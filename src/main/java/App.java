@@ -15,13 +15,15 @@ public class App {
 
     public static void main(String[] args) {
         EntityManager entityManager = JpaUtil.getEntityManagerFactory().createEntityManager();
+        initializeDao(entityManager);
         entityManager.getTransaction().begin();
+
 //        Employee employee = new Employee();
 //        employee.setName("Ali");
 //        employee.setEmpCode("e1");
 //        employee.setSalary(250.2);
 //
-//        entityManager.persist(employee);
+//        employeeDao.save(employee);
 //
 //        Address address1 = new Address();
 //        address1.setPostalCode("11-2225-6578");
@@ -29,7 +31,7 @@ public class App {
 //        address1.setCity("tehran");
 //        address1.setEmployee(employee);
 //
-//        entityManager.persist(address1);
+//        addressDao.save(address1);
 //
 //        Address address2 = new Address();
 //        address2.setPostalCode("25-4561-78923");
@@ -37,24 +39,24 @@ public class App {
 //        address2.setCity("tehran");
 //        address2.setEmployee(employee);
 //
-//        entityManager.persist(address2);
+//        addressDao.save(address2);
 //
 //        PhoneNumber phoneNumber1 = new PhoneNumber();
 //        phoneNumber1.setAddress(address1);
 //        phoneNumber1.setMobNumber("09124569875");
 //        phoneNumber1.setTelNumber("02166609851");
 //
-//        entityManager.persist(phoneNumber1);
+//        phoneNumberDao.save(phoneNumber1);
 //
 //        PhoneNumber phoneNumber2 = new PhoneNumber();
 //        phoneNumber2.setAddress(address1);
 //        phoneNumber2.setMobNumber("09124791297");
 //        phoneNumber2.setTelNumber("02155507139");
 //
-//        entityManager.persist(phoneNumber2);
+//        phoneNumberDao.save(phoneNumber2);
 
-        Address address = entityManager.find(Address.class, 5);
-        System.out.println(address.getPhoneNumbers().toString());
+        Address address = addressDao.load(5);
+        System.out.println(address.getPhoneNumbers());
 
 //        Employee employee = entityManager.find(Employee.class, 3);
 //        System.out.println(employee.getName());

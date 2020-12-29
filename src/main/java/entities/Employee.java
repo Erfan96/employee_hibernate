@@ -25,6 +25,6 @@ public class Employee {
     @Column(name = "salary", nullable = false)
     private Double salary;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
     private Set<Address> address;
 }

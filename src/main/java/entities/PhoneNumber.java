@@ -16,10 +16,10 @@ public class PhoneNumber {
     private Integer id;
 
     @Column(name = "tel_number", nullable = false, length = 11)
-    private Integer telNumber;
+    private String telNumber;
 
     @Column(name = "mob_number", nullable = false, length = 11)
-    private Integer mobNumber;
+    private String mobNumber;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "add_id", nullable = false)

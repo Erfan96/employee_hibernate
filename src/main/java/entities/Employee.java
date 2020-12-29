@@ -2,6 +2,7 @@ package entities;
 
 import lombok.*;
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "employee")
@@ -23,4 +24,7 @@ public class Employee {
 
     @Column(name = "salary", nullable = false)
     private Double salary;
+
+    @OneToMany
+    private Set<Address> address;
 }

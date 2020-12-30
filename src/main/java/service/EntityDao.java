@@ -3,7 +3,7 @@ package service;
 import javax.persistence.EntityManager;
 
 public abstract class EntityDao<T, U> {
-    private EntityManager entityManager;
+    protected EntityManager entityManager;
 
     public EntityDao(EntityManager entityManager) {
         this.entityManager = entityManager;

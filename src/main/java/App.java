@@ -19,9 +19,9 @@ public class App {
         entityManager.getTransaction().begin();
 
 //        Employee employee = new Employee();
-//        employee.setName("Ali");
-//        employee.setEmpCode("e1");
-//        employee.setSalary(250.2);
+//        employee.setName("Hasan");
+//        employee.setEmpCode("e2");
+//        employee.setSalary(400.0);
 //
 //        employeeDao.save(employee);
 //
@@ -55,12 +55,19 @@ public class App {
 //
 //        phoneNumberDao.save(phoneNumber2);
 
-        Address address = addressDao.load(5);
-        System.out.println(address.getPhoneNumbers());
+//        Address address = addressDao.load(5);
+//        System.out.println(address.getPhoneNumbers());
 
 //        Employee employee = entityManager.find(Employee.class, 3);
 //        System.out.println(employee.getName());
 //        entityManager.remove(employee);
+
+
+        Double aDouble = employeeDao.getMaxSalary();
+        System.out.println(aDouble);
+
+        Employee employee = employeeDao.getEmployeeHasMaxSalary();
+        System.out.println(employee);
 
         entityManager.getTransaction().commit();
         entityManager.close();

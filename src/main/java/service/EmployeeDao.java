@@ -85,7 +85,22 @@ public class EmployeeDao extends EntityDao<Employee, Integer> {
             System.out.println(r.get(0)+ " --> " + r.get(1)));
     }
 
-    public void sample3(){
+    public void getEmployeeHasMaxSalaryPerCity(){
+        CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
+        CriteriaQuery<Tuple> criteria = criteriaBuilder.createTupleQuery();
+        Root<Employee> fromEmployee = criteria.from(Employee.class);
 
+        Subquery<Double> sq = criteria.subquery(Double.class);
+        Root<Employee> subRoot = sq.from(Employee.class);
+        Join<Employee, Address> empAddJoin = subRoot.join("addresses");
+
+        sq.select(criteriaBuilder.max(subRoot.get("salary"))).groupBy(empAddJoin.get("city"));
+        criteria.multiselect(fromEmployee).where((fromEmployee.get("salary").in(sq)));
+
+        TypedQuery<Tuple> typedQuery = entityManager.createQuery(criteria);
+        List<Tuple> list = typedQuery.getResultList();
+
+        list.forEach( r ->
+                System.out.println(r.get(0)+ " --> "));
     }
 }

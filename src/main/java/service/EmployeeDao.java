@@ -104,6 +104,18 @@ public class EmployeeDao extends EntityDao<Employee, Integer> {
                 System.out.println(r.get(0)+ " --> "));
     }
 
+    public void getEmployeeWithPostalCode(String postalCode) {
+        CriteriaBuilder cb = getCriteriaBuilder();
+        CriteriaQuery<Employee> criteria = getCriteriaQuery();
+        Root<Employee> fromEmployee = criteria.from(Employee.class);
+
+        Join<Employee, Address> empAddJoin = fromEmployee.join("addresses");
+        criteria.select(fromEmployee).where(cb.equal(empAddJoin.get("postalCode"), postalCode));
+
+        TypedQuery<Employee> typedQuery = entityManager.createQuery(criteria);
+        System.out.println(typedQuery.getSingleResult());
+    }
+
     public void sample3() {
 
     }

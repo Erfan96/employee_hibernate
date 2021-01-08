@@ -34,44 +34,6 @@ public class EmployeeDao extends EntityDao<Employee, Integer> {
         return typedQuery.getSingleResult();
     }
 
-    public void sample() {
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Tuple> criteria = cb.createTupleQuery();
-        Root<Employee> fromEmployee = criteria.from(Employee.class);
-        Root<Address> fromAddress = criteria.from(Address.class);
-
-        Path<String> city = fromAddress.get("city");
-        Path<Double> salary = fromEmployee.get("salary");
-
-        //criteria.multiselect(city, cb.greatest(fromEmployee.get("salary")));
-        List<Tuple> resultList = entityManager.createQuery(criteria).getResultList();
-
-        resultList.forEach(row ->
-                System.out.printf("City : %s, Max salary : %f%n", row.get(city), row.get(salary) ));
-    }
-
-    public void sample2() {
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Tuple> criteria = cb.createTupleQuery();
-        Root<Employee> fromEmployee = criteria.from(Employee.class);
-        Root<Address> fromAddress = criteria.from(Address.class);
-
-        criteria.multiselect(
-                criteria.from(Employee.class),
-                criteria.from(Address.class)
-        );
-
-        TypedQuery<Tuple> query = entityManager.createQuery(criteria);
-        List<Tuple> result = query.getResultList();
-
-        for (Tuple tuple : result) {
-            Employee employee = tuple.get(0, Employee.class);
-            System.out.println(employee);
-            Address address = tuple.get(1, Address.class);
-            System.out.println(address);
-        }
-    }
-
     public void getMaxSalaryPerCity() {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Tuple> criteria = cb.createTupleQuery();

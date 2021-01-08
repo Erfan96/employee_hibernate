@@ -61,14 +61,14 @@ public class EmployeeDao extends EntityDao<Employee, Integer> {
 
         sq.select(criteriaBuilder.max(subRoot.get("salary")))
                 .where(criteriaBuilder.equal(empAddJoin.get("city"), AddJoin.get("city")));
-        criteria.multiselect(fromEmployee).where((fromEmployee.get("salary").in(sq)))
+        criteria.multiselect(fromEmployee, AddJoin.get("city")).where((fromEmployee.get("salary").in(sq)))
                 .groupBy(fromEmployee.get("id"));
 
         TypedQuery<Tuple> typedQuery = entityManager.createQuery(criteria);
         List<Tuple> list = typedQuery.getResultList();
 
         list.forEach( r ->
-                System.out.println(r.get(0)+ " --> "));
+                System.out.println(r.get(0)+ " --> " + r.get(1)));
     }
 
     public void getEmployeeWithPostalCode(String postalCode) {

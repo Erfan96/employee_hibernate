@@ -1,6 +1,8 @@
 package service;
 
 import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 
 public abstract class EntityDao<T, U> {
     protected EntityManager entityManager;
@@ -26,4 +28,12 @@ public abstract class EntityDao<T, U> {
     }
 
     public abstract Class<T> getEntityClass();
+
+    public CriteriaBuilder criteriaBuilder() {
+     return entityManager.getCriteriaBuilder();
+    }
+
+    public CriteriaQuery<T> criteriaQuery() {
+        return criteriaBuilder().createQuery(getEntityClass());
+    }
 }

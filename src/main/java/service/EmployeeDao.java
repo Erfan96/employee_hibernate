@@ -70,7 +70,7 @@ public class EmployeeDao extends EntityDao<Employee, Integer> {
         }
     }
 
-    public void maxSalaryPerCity() {
+    public void getMaxSalaryPerCity() {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Tuple> criteria = cb.createTupleQuery();
         Root<Employee> fromEmployee = criteria.from(Employee.class);
@@ -102,5 +102,9 @@ public class EmployeeDao extends EntityDao<Employee, Integer> {
 
         list.forEach( r ->
                 System.out.println(r.get(0)+ " --> "));
+    }
+
+    public void sample3() {
+
     }
 }

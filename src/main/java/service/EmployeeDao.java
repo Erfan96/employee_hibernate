@@ -53,13 +53,16 @@ public class EmployeeDao extends EntityDao<Employee, Integer> {
         CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
         CriteriaQuery<Tuple> criteria = criteriaBuilder.createTupleQuery();
         Root<Employee> fromEmployee = criteria.from(Employee.class);
+        Join<Employee, Address> AddJoin = fromEmployee.join("addresses");
 
         Subquery<Double> sq = criteria.subquery(Double.class);
         Root<Employee> subRoot = sq.from(Employee.class);
         Join<Employee, Address> empAddJoin = subRoot.join("addresses");
 
-        sq.select(criteriaBuilder.max(subRoot.get("salary"))).groupBy(empAddJoin.get("city"));
-        criteria.multiselect(fromEmployee).where((fromEmployee.get("salary").in(sq)));
+        sq.select(criteriaBuilder.max(subRoot.get("salary")))
+                .where(criteriaBuilder.equal(empAddJoin.get("city"), AddJoin.get("city")));
+        criteria.multiselect(fromEmployee).where((fromEmployee.get("salary").in(sq)))
+                .groupBy(fromEmployee.get("id"));
 
         TypedQuery<Tuple> typedQuery = entityManager.createQuery(criteria);
         List<Tuple> list = typedQuery.getResultList();

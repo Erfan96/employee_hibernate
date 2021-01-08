@@ -29,11 +29,11 @@ public abstract class EntityDao<T, U> {
 
     public abstract Class<T> getEntityClass();
 
-    public CriteriaBuilder criteriaBuilder() {
+    public CriteriaBuilder getCriteriaBuilder() {
      return entityManager.getCriteriaBuilder();
     }
 
-    public CriteriaQuery<T> criteriaQuery() {
-        return criteriaBuilder().createQuery(getEntityClass());
+    public CriteriaQuery<T> getCriteriaQuery() {
+        return getCriteriaBuilder().createQuery(getEntityClass());
     }
 }

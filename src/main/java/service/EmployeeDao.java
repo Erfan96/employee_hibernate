@@ -2,6 +2,8 @@ package service;
 
 import entities.Address;
 import entities.Employee;
+import entities.PhoneNumber;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Tuple;
 import javax.persistence.TypedQuery;
@@ -116,7 +118,16 @@ public class EmployeeDao extends EntityDao<Employee, Integer> {
         System.out.println(typedQuery.getSingleResult());
     }
 
-    public void sample3() {
+    public void getEmployeeWithTelNumber(String telNumber) {
+        CriteriaBuilder cb = getCriteriaBuilder();
+        CriteriaQuery<Employee> criteria = getCriteriaQuery();
+        Root<Employee> fromEmployee = criteria.from(Employee.class);
 
+        Join<Employee, Address> empAddJoin = fromEmployee.join("addresses");
+        Join<Address, PhoneNumber> addPhoJoin = empAddJoin.join("phoneNumbers");
+        criteria.select(fromEmployee).where(cb.equal(addPhoJoin.get("telNumber"), telNumber));
+
+        TypedQuery<Employee> typedQuery = entityManager.createQuery(criteria);
+        System.out.println(typedQuery.getSingleResult());
     }
 }

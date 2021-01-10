@@ -63,19 +63,19 @@ public class App {
 //        entityManager.remove(employee);
 
 
-        Double aDouble = employeeDao.getMaxSalary();
-        System.out.println(aDouble);
+//        Double aDouble = employeeDao.getMaxSalary();
+//        System.out.println(aDouble);
+//
+//        Employee employeeA = employeeDao.getEmployeeHasMaxSalary();
+//        System.out.println(employeeA);
 
-        Employee employeeA = employeeDao.getEmployeeHasMaxSalary();
-        System.out.println(employeeA);
 
+        //employeeDao.getMaxSalaryPerCity();
 
-        employeeDao.getMaxSalaryPerCity();
+        //employeeDao.getEmployeeHasMaxSalaryPerCity();
 
-        employeeDao.getEmployeeHasMaxSalaryPerCity();
-
-        employeeDao.getEmployeeWithPostalCode("54-9874-2594");
-
+//        employeeDao.getEmployeeWithPostalCode("54-9874-2594");
+//
         employeeDao.getEmployeeWithTelNumber("09173456789");
 
         entityManager.getTransaction().commit();
